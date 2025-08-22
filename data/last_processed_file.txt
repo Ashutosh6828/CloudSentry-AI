@@ -1,0 +1,1 @@
+AWSLogs/289979559671/CloudTrail/us-west-2/2025/08/20/289979559671_CloudTrail_us-west-2_20250820T1210Z_yAKqFvvRZAnD2OWv.json.gz
