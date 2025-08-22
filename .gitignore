@@ -1,0 +1,15 @@
+# Ignore the virtual environment
+venv/
+
+# Ignore large executables and installers
+*.exe
+*.msi
+*.zip
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore data files (optional, but good practice if they are large)
+data/raw_logs.jsonl
+data/processed_features.csv
