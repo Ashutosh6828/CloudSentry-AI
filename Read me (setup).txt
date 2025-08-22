@@ -1,0 +1,78 @@
+# AI-Enabled Cloud Security Monitoring with Grafana
+
+This project provides an end-to-end pipeline for ingesting AWS CloudTrail logs, detecting anomalies using an AI model, and visualizing the results in a real-time Grafana dashboard.
+
+## Project Goal
+
+The primary objective is to transform raw cloud logs into actionable security insights. The system automatically identifies suspicious activities and presents them on a unified dashboard, allowing for rapid incident investigation and response.
+
+---
+
+## Project Structure
+
+The project is organized into the following components:
+
+* **`ingest_logs.py`**: Connects to AWS S3 to download CloudTrail logs.
+* **`preprocess.py`**: Cleans and prepares the raw logs for the AI model.
+* **`detector.py`**: Uses a trained `IsolationForest` model to find anomalies and sends the results to InfluxDB.
+* **`run.bat`**: A batch script to execute the entire Python pipeline in the correct order.
+* **`requirements.txt`**: A list of all required Python libraries.
+* **`data/`**: A folder for storing transient data like raw logs, processed features, and the saved AI model.
+* **`venv/`**: The Python virtual environment for this project.
+
+---
+
+## Required Software (Free & Open Source)
+
+1.  **Python 3.x**
+2.  **AWS CLI**: For configuring AWS credentials.
+3.  **InfluxDB 2.x**: The database for storing anomalies and metrics.
+4.  **Loki & Promtail**: The database and shipper for raw logs.
+5.  **Grafana**: The visualization and dashboarding platform.
+
+---
+
+## How to Run the Entire System
+
+This is the complete workflow to start the services and run the analysis.
+
+### Step 1: Start the Backend Services
+
+You need **three separate PowerShell terminals** for this. These services must be left running in the background.
+
+1.  **Start InfluxDB (for Anomalies):**
+    ```powershell
+    C:\InfluxDB\influxd.exe
+    ```
+
+2.  **Start Loki (for All Logs):**
+    ```powershell
+    cd C:\Grafana-Logging
+    .\loki-windows-amd64.exe
+    ```
+
+3.  **Start Promtail (the Log Shipper):**
+    ```powershell
+    cd C:\Grafana-Logging
+    .\promtail-windows-amd64.exe --config.file=promtail-config.yml
+    ```
+
+### Step 2: Run Your Analysis Pipeline
+
+You only need **one terminal** for this step.
+
+1.  **Navigate and Run:**
+    * Open a new PowerShell terminal.
+    * Go to your project directory: `cd D:\project\cloud-ir`
+    * Execute the batch script:
+        ```powershell
+        .\run.bat
+        ```
+
+### Step 3: View the Dashboard
+
+1.  **Open Grafana:**
+    * Go to **`http://localhost:3000`** in your web browser.
+2.  **Check Your Dashboard:**
+    * Navigate to your "Cloud Anomaly Detector" dashboard.
+    * Set the time range to a wide window (like "Last 7 days") to see all your data.
