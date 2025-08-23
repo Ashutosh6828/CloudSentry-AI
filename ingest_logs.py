@@ -9,8 +9,8 @@ from influxdb_client import InfluxDBClient, Point
 from influxdb_client.client.write_api import SYNCHRONOUS
 
 # --- Configuration ---
-S3_BUCKET = "aws-cloudtrail-logs-289979559671-8fc8af41"
-AWS_ACCOUNT_ID = "289979559671"
+S3_BUCKET = ""
+AWS_ACCOUNT_ID = ""
 AWS_REGION = "ap-south-1"
 
 OUTPUT_DIR = "data"
@@ -18,7 +18,7 @@ RAW_LOGS_FILE = os.path.join(OUTPUT_DIR, "raw_logs.jsonl")
 
 # --- InfluxDB Configuration ---
 INFLUX_URL = "http://localhost:8086"
-INFLUX_TOKEN = "vn5TnynGiTCNT5iLPdZ7UrNUsGC0TNCYWQe4hD37s0C904OmG7e65XVVAmNoEgPnShdQiNLuzfFWVx0qc0JrlA=="
+INFLUX_TOKEN = ""
 INFLUX_ORG = "myorg"
 INFLUX_BUCKET = "cloudtrail_logs"
 
